@@ -29,6 +29,34 @@ void ACharacterBase::Tick(float DeltaTime)
 void ACharacterBase::SetupPlayerInputComponent(UInputComponent* PlayerInputComponent)
 {
 	Super::SetupPlayerInputComponent(PlayerInputComponent);
-
+	PlayerInputComponent->BindAxis(TEXT("MoveForward"), this, &ACharacterBase::MoveForward);
+	PlayerInputComponent->BindAxis(TEXT("MoveSideways"), this, &ACharacterBase::MoveSideways);
+	PlayerInputComponent->BindAxis(TEXT("LookUp"), this, &ACharacterBase::LookUp);
+	PlayerInputComponent->BindAxis(TEXT("LookSideways"),this, &ACharacterBase::LookSideways);
 }
+
+void ACharacterBase::MoveForward(float AxisValue)
+{
+	AddMovementInput(GetActorForwardVector() * AxisValue);
+}
+
+
+void ACharacterBase::MoveSideways(float AxisValue)
+{
+	AddMovementInput(GetActorRightVector() * AxisValue);
+}
+
+
+void ACharacterBase::LookUp(float AxisValue)
+{
+	AddControllerPitchInput(AxisValue * RotationRate * GetWorld()->GetDeltaSeconds());
+}
+
+void ACharacterBase::LookSideways(float AxisValue)
+{
+	//FrameRateIndependance
+	AddControllerYawInput(AxisValue * RotationRate * GetWorld()->GetDeltaSeconds()); 
+}
+
+
 
