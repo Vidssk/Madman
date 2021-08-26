@@ -38,12 +38,14 @@ void ACharacterBase::SetupPlayerInputComponent(UInputComponent* PlayerInputCompo
 void ACharacterBase::MoveForward(float AxisValue)
 {
 	AddMovementInput(GetActorForwardVector() * AxisValue);
+	if(AxisValue != 0 ) UE_LOG(LogTemp, Warning, TEXT("inputDirection: %f"), AxisValue);
 }
 
 
 void ACharacterBase::MoveSideways(float AxisValue)
 {
 	AddMovementInput(GetActorRightVector() * AxisValue);
+	if(AxisValue != 0) UE_LOG(LogTemp, Warning, TEXT("inputDirection: %f"), AxisValue);
 }
 
 
