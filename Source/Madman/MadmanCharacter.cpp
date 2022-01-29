@@ -46,18 +46,27 @@ void AMadmanCharacter::Tick(float DeltaTime)
 void AMadmanCharacter::SetupPlayerInputComponent(UInputComponent* PlayerInputComponent)
 {
 	Super::SetupPlayerInputComponent(PlayerInputComponent);
-	//PlayerInputComponent->BindAxis(TEXT("MoveForward"), this, &AMadmanCharacter::ForwardInput);
-	//PlayerInputComponent->BindAxis(TEXT("MoveSideways"), this, &AMadmanCharacter::SidewaysInput);
+	PlayerInputComponent->BindAxis(TEXT("MoveForward"), this, &AMadmanCharacter::ForwardInput);
+	PlayerInputComponent->BindAxis(TEXT("MoveSideways"), this, &AMadmanCharacter::SidewaysInput);
 }
 
-/*void AMadmanCharacter::ForwardInput(float AxisValue)
+void AMadmanCharacter::ForwardInput(float AxisValue)
 {
-	inputDirection.Y = Camera->GetForwardVector().Y *  (-AxisValue);
-
+	inputDirection.Y = Camera->GetForwardVector().X * AxisValue;
+	inputDirection.Z = GetActorLocation().Z;
+	DrawDebugLine
+	(
+		GetWorld(),
+		GetActorLocation(),
+		inputDirection,
+		FColor(0, 255, 0),
+		false,
+		0.f, 0, 5
+	);
 }
-
 void AMadmanCharacter::SidewaysInput(float AxisValue)
 {
+/*
 	FVector Location = GetActorLocation();
 	Location.Z = 100;
 	inputDirection.X = Camera->GetRightVector().X * AxisValue;
@@ -71,6 +80,6 @@ void AMadmanCharacter::SidewaysInput(float AxisValue)
 		0.f, 0, 5
 	);
 	UE_LOG(LogTemp, Warning, TEXT("inputDirection: %f %f %f"), inputDirection.X, inputDirection.Y, inputDirection.Z);
+*/
 
 }
-*/

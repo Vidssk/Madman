@@ -24,8 +24,8 @@ public:
 	virtual void SetupPlayerInputComponent(class UInputComponent* PlayerInputComponent) override;
 
 private:
-	//void ForwardInput(float AxisValue);
-	//void SidewaysInput(float AxisValue);
+	void ForwardInput(float AxisValue);
+	void SidewaysInput(float AxisValue);
 
 	//components
 	UPROPERTY(VisibleAnywhere, Category="Components")
